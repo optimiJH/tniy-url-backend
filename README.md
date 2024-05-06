@@ -3,6 +3,7 @@ NodeJS module to create tiny url (nanoid) for long url mapped to a unique counte
 Users are redirected to the original URL when they hit these short links.
 
 Live Deployment Info
+
 1.Frontend is deployed with Netlify
 https://tinyurltest.netlify.app/
 
@@ -21,7 +22,9 @@ https://secure-mesa-82846-88fa7338d24a.herokuapp.com/
 
 ## Usage
 + Url to test for backend page deployment (test only)
+
 Example: https://secure-mesa-82846-88fa7338d24a.herokuapp.com/
+
 Response:{"message":"Home page"}
 
 ```javascript
@@ -33,7 +36,9 @@ app.get("/", (req, res) => {
 ```
 
 + Url to get all stored data from database collection (test only)
+
 Example: https://secure-mesa-82846-88fa7338d24a.herokuapp.com/urls
+
 Response:[
   {
     "_id": "6637f93d36d45b360033a73d",
@@ -53,7 +58,6 @@ Response:[
   }
 ]
 
-
 ```javascript
 app.get("/urls", async (req, res, next) => {
   let urls = await URL.find({}).exec();
@@ -62,9 +66,10 @@ app.get("/urls", async (req, res, next) => {
 ```
 
 + Shorten URL
+
 Example: https://secure-mesa-82846-88fa7338d24a.herokuapp.com/api/shorten
-This url is used to shorten long url to a "slug" url, i.e. short url(because later it would be appended back for redirect the url),
-First, the given url is been looked up in database to see if it had been created before, if yes, then the short url will be given again to user. If not, the validation of given url would be verified by axios request, if the http/https request is valid, then by using nanoid module's hashing mechanism, the slug(short url) would be created.
+
+This url is used to shorten long url to a "slug" url, i.e. short url(because later it would be appended back for redirect the url),First, the given url is been looked up in database to see if it had been created before, if yes, then the short url will be given again to user. If not, the validation of given url would be verified by axios request, if the http/https request is valid, then by using nanoid module's hashing mechanism, the slug(short url) would be created.
 
 ```javascript
 app.post("/api/shorten", async (req, res, next) => {
@@ -119,7 +124,9 @@ app.post("/api/shorten", async (req, res, next) => {
 ```
 
 + Retrieve Long URL from hash
+
 This url is used for redirecting to originalUrl for user: 
+
 Example: https://secure-mesa-82846-88fa7338d24a.herokuapp.com/1e3ac11d
 
 ```javascript
@@ -140,8 +147,10 @@ app.get("/:slug", async (req, res, next) => {
 ```
 
 + Simple Error handling
+
 This url is used for simple error handling on invalid url usage on backend, "Not found" msg will be reponse to user.
 Example: https://secure-mesa-82846-88fa7338d24a.herokuapp.com/INValidurl
+
 Response: {"message":"Not found - /INValidurl","error":{"status":404}}
 
 ```javascript
